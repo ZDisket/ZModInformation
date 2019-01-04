@@ -84,6 +84,19 @@ ZMIErrorCodes::Enum ModInformation::Save(const std::wstring & inName)
 	return ZMIErrorCodes::NoError;
 }
 
+ZModInfo ModInformation::GetBasicInfo()
+{
+	ZModInfo Inf1;
+
+	Inf1.ModAuthors = Authors;
+	Inf1.ModDescription = Description;
+	Inf1.ModName = Name;
+	Inf1.ModVersion = ModVersion;
+
+	return Inf1;
+
+}
+
 
 ModInformation::~ModInformation()
 {

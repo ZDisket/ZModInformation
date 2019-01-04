@@ -25,7 +25,10 @@ BYTE[] zipdata
 
 struct ZModInfo {
 	
-
+	std::wstring ModName;
+	std::wstring ModDescription;
+	std::vector<std::wstring> ModAuthors;
+	double ModVersion;
 };
 
 namespace ZMIErrorCodes {
@@ -41,7 +44,6 @@ namespace ZMIErrorCodes {
 class ZMI_API ModInformation
 {
 private:
-	ZModInfo ModInfo;
 
 
 	short FVersion;
@@ -65,6 +67,9 @@ public:
 	ModInformation();
     ZMIErrorCodes::Enum Open(const std::wstring & inName);
 	ZMIErrorCodes::Enum Save(const std::wstring& inName);
+	
+	ZModInfo GetBasicInfo();
+
 	~ModInformation();
 };
 
