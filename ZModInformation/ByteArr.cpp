@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "sdafx.hpp"
 #include "ByteArr.h"
 
 
@@ -69,8 +69,29 @@ void ByteArr::Add(void * inDat, const size_t & DatSz)
 	CurrentPos += DatSz;
 }
 
-ByteArr::~ByteArr()
+void ByteArr::CAlloc(const size_t & SetSize)
 {
 	if (Data)
 		delete[] Data;
+
+	CurrentPos = 0;
+
+	Data = new BYTE[SetSize];
+
+	DataSz = SetSize;
+
+}
+
+ByteArr::~ByteArr()
+{
+	try {
+		if (Data)
+			delete[] Data;
+	
+	}
+	catch (...) {
+	
+	
+	}
+
 }

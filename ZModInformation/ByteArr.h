@@ -1,6 +1,10 @@
 #pragma once
 #include "ZMI_DLL.h"
 #include <string>
+// Incomplete class meant to simplify interactions with dynamic size byte arrays
+// Right now it can only safely store
+
+typedef unsigned char BYTE;
 class ZMI_API ByteArr
 {
 private:
@@ -17,6 +21,7 @@ public:
 	// Create a new byte arr by copying and REPLACING the contents
 	ByteArr(BYTE* CopyArr, const size_t& ArrSz);
 
+	
 	// Get a const reference to the raw array
 	const BYTE* CoData() const;
 
@@ -26,7 +31,8 @@ public:
 	void Assign(BYTE* cpyArr, const size_t& cpySz);
 
 	// Get the size of the array
-	inline size_t Size() { return DataSz; }
+	inline size_t Size() const { return DataSz; }
+
 
 	inline void IncreaseSize(const size_t& Add) { Realloc(DataSz + Add); }
 
@@ -35,6 +41,9 @@ public:
 	// Add something raw to the byte array. It's highly recommended 
 	// that you instead use the overloaded operator <<
 	void Add(void* inDat, const size_t& DatSz);
+
+	// REPLACE the array and allocate a new one with specified size.
+	void CAlloc(const size_t& SetSize);
 
 	// Add a simple data type to the bytearr
 	template<typename Ty>

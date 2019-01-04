@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include "ByteArr.h"
 /*
 zmi modinfo struc:
 short fversion
@@ -41,12 +41,13 @@ namespace ZMIErrorCodes {
 	};
 }
 
+
 class ZMI_API ModInformation
 {
 private:
 
 
-	short FVersion;
+	const short FVersion = 1;
 
 	// Basic data
 	std::wstring Name;
@@ -55,13 +56,10 @@ private:
 	double ModVersion;
 
 	// Image
-	INT64 ImgDataSz;
-	BYTE* ImgData;
+	ByteArr ImgData;
 
 	// Files
-	INT64 ZipSize;
-	BYTE* ZipData;
-
+	ByteArr ZipData;
 
 public:
 	ModInformation();
@@ -69,6 +67,10 @@ public:
 	ZMIErrorCodes::Enum Save(const std::wstring& inName);
 	
 	ZModInfo GetBasicInfo();
+	void SetBasicInfo(const ZModInfo& Minf);
+
+	ByteArr& GetImageData() { return ImgData; }
+	ByteArr& GetZipData() { return ZipData; }
 
 	~ModInformation();
 };

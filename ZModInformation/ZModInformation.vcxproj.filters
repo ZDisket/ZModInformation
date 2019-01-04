@@ -15,22 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ModInformation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="extdeps\ZFile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ZMI_DLL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ByteArr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdafx.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,10 +47,10 @@
     <ClCompile Include="ModInformation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="extdeps\ZFile.cpp">
+    <ClCompile Include="ByteArr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ByteArr.cpp">
+    <ClCompile Include="ZFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

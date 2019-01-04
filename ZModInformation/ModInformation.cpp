@@ -1,6 +1,6 @@
-#include "stdafx.h"
+#include "sdafx.hpp"
 #include "ModInformation.h"
-#include "extdeps/ZFile.h"
+#include "ZFile.h"
 
 /*
 zmi modinfo struc:
@@ -21,8 +21,7 @@ BYTE[] zipdata
 
 ModInformation::ModInformation()
 {
-	ImgData = NULL;
-	ZipData = NULL;
+	
 
 }
 
@@ -40,16 +39,10 @@ ZMIErrorCodes::Enum ModInformation::Open(const std::wstring & inName)
 	File >> Authors;
 	File >> ModVersion;
 
-	File >> ImgDataSz;
+	File >> ImgData;
 
-	ImgData = new BYTE[(size_t)ImgDataSz];
+	File >> ZipData;
 	
-	File.Read(ImgData, ImgDataSz);
-
-	File >> ZipSize;
-
-	ZipData = new BYTE[(size_t)ZipSize];
-	File.Read(ZipData, ZipSize);
 	File.Close();
 
 
@@ -71,13 +64,9 @@ ZMIErrorCodes::Enum ModInformation::Save(const std::wstring & inName)
 	sFile << Authors;
 	sFile << ModVersion;
 
-	sFile << ImgDataSz;
+	sFile << ImgData;
 
-	sFile.Write(ImgData, ImgDataSz);
-
-	sFile << ZipSize;
-
-	sFile.Write(ZipData, ZipSize);
+	sFile << ZipData;
 	
 	sFile.Close();
 
@@ -97,14 +86,17 @@ ZModInfo ModInformation::GetBasicInfo()
 
 }
 
+void ModInformation::SetBasicInfo(const ZModInfo & Minf)
+{
+	Authors = Minf.ModAuthors;
+	Description = Minf.ModDescription;
+	Name = Minf.ModName;
+	ModVersion = Minf.ModVersion;
+}
+
 
 ModInformation::~ModInformation()
 {
-	if (ZipData)
-		delete[] ZipData;
-
-	if (ImgData)
-		delete[] ImgData;
-
+	
 
 }
