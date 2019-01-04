@@ -24,21 +24,7 @@ BYTE[] zipdata
 
 
 struct ZModInfo {
-	short FVersion;
-
-	// Basic data
-	std::wstring Name;
-	std::wstring Description;
-	std::vector<std::wstring> Authors;
-    double ModVersion;
-
-	// Image
-	INT64 ImgDataSz;
-	BYTE* ImgData;
-
-	// Files
-	INT64 ZipSize;
-	BYTE* ZipData;
+	
 
 };
 
@@ -58,10 +44,27 @@ private:
 	ZModInfo ModInfo;
 
 
+	short FVersion;
+
+	// Basic data
+	std::wstring Name;
+	std::wstring Description;
+	std::vector<std::wstring> Authors;
+	double ModVersion;
+
+	// Image
+	INT64 ImgDataSz;
+	BYTE* ImgData;
+
+	// Files
+	INT64 ZipSize;
+	BYTE* ZipData;
+
+
 public:
 	ModInformation();
-    ZMIErrorCodes::Enum Open(const std::wstring & Name, ZModInfo & omInf);
-	ZMIErrorCodes::Enum Save(const std::wstring& Name, ZModInfo& InfSave);
+    ZMIErrorCodes::Enum Open(const std::wstring & inName);
+	ZMIErrorCodes::Enum Save(const std::wstring& inName);
 	~ModInformation();
 };
 

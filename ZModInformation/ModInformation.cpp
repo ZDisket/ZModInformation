@@ -21,33 +21,35 @@ BYTE[] zipdata
 
 ModInformation::ModInformation()
 {
+	ImgData = NULL;
+	ZipData = NULL;
+
 }
 
-ZMIErrorCodes::Enum ModInformation::Open(const std::wstring & Name,ZModInfo& omInf)
+ZMIErrorCodes::Enum ModInformation::Open(const std::wstring & inName)
 {
 	ZFile File;
-	if (!File.Open(Name, EZFOpenMode::BinaryRead)) {
+	if (!File.Open(inName, EZFOpenMode::BinaryRead)) {
 		return ZMIErrorCodes::CannotOpenFile;
 	}
 
-	File.Read(omInf.FVersion);
+	File >> FVersion;
 
-	File.Read(omInf.Name);
-	File.Read(omInf.Description);
-	File.Read(omInf.Authors);
-	File.Read(omInf.ModVersion);
+	File >> Name;
+	File >> Description;
+	File >> Authors;
+	File >> ModVersion;
 
-	File.Read(omInf.ImgDataSz);
+	File >> ImgDataSz;
 
-	omInf.ImgData = new BYTE[omInf.ImgDataSz];
+	ImgData = new BYTE[ImgDataSz];
 	
-	File.Read(&omInf.ImgData, omInf.ImgDataSz);
+	File.Read(ImgData, ImgDataSz);
 
-	File.Read(omInf.ZipSize);
+	File >> ZipSize;
 
-	omInf.ZipData = new BYTE[omInf.ZipSize];
-	File.Read(&omInf.ZipData, omInf.ZipSize);
-
+	ZipData = new BYTE[ZipSize];
+	File.Read(ZipData, ZipSize);
 	File.Close();
 
 
@@ -55,27 +57,27 @@ ZMIErrorCodes::Enum ModInformation::Open(const std::wstring & Name,ZModInfo& omI
 	return ZMIErrorCodes::NoError;
 }
 
-ZMIErrorCodes::Enum ModInformation::Save(const std::wstring & Name, ZModInfo & InfSave)
+ZMIErrorCodes::Enum ModInformation::Save(const std::wstring & inName)
 {
 	ZFile sFile;
 
-	if (!sFile.Open(Name, EZFOpenMode::BinaryWrite))
+	if (!sFile.Open(inName, EZFOpenMode::BinaryWrite))
 		return ZMIErrorCodes::CannotOpenFile;
 
-	sFile.Write(InfSave.FVersion);
+	sFile << FVersion;
 
-	sFile.Write(InfSave.Name);
-	sFile.Write(InfSave.Description);
-	sFile.Write(InfSave.Authors);
-	sFile.Write(InfSave.ModVersion);
+	sFile << Name;
+	sFile << Description;
+	sFile << Authors;
+	sFile << ModVersion;
 
-	sFile.Write(InfSave.ImgDataSz);
+	sFile << ImgDataSz;
 
-	sFile.Write(&InfSave.ImgData, InfSave.ImgDataSz);
+	sFile.Write(ImgData, ImgDataSz);
 
-	sFile.Write(InfSave.ZipSize);
+	sFile << ZipSize;
 
-	sFile.Write(&InfSave.ZipData, InfSave.ZipSize);
+	sFile.Write(ZipData, ZipSize);
 	
 	sFile.Close();
 
