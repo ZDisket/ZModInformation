@@ -42,13 +42,13 @@ ZMIErrorCodes::Enum ModInformation::Open(const std::wstring & inName)
 
 	File >> ImgDataSz;
 
-	ImgData = new BYTE[ImgDataSz];
+	ImgData = new BYTE[(size_t)ImgDataSz];
 	
 	File.Read(ImgData, ImgDataSz);
 
 	File >> ZipSize;
 
-	ZipData = new BYTE[ZipSize];
+	ZipData = new BYTE[(size_t)ZipSize];
 	File.Read(ZipData, ZipSize);
 	File.Close();
 
@@ -100,4 +100,11 @@ ZModInfo ModInformation::GetBasicInfo()
 
 ModInformation::~ModInformation()
 {
+	if (ZipData)
+		delete[] ZipData;
+
+	if (ImgData)
+		delete[] ImgData;
+
+
 }

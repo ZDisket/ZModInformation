@@ -112,7 +112,7 @@ public:
 	void Write(const std::basic_string<chardat>& Str) {
 		// Write the size first
 		Write(Str.size());
-		Stream.write((char*)&Str.data(), Str.size());
+		Stream.write((char*)Str.data(), Str.size());
 	
 	}
 
@@ -135,8 +135,8 @@ public:
 	template<typename vdat>
 	void Write(const std::vector<vdat>& Vec) {
 		Write(Vec.size());
-		std::vector<vdat>::const_iterator It = Vec.begin();
-
+		auto It = Vec.begin();
+		
 		while (It != Vec.end()) {
 			Write(*It);
 			++It;
