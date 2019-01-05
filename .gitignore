@@ -13,6 +13,7 @@
 # Sample mod files
 /ZModInfoTest/A World DIvided/
 /ZModInfoTest/Fishes/
+
 # ZMI folder, gets built by the post-build scripts of the 1st project
 ZMI/
 
