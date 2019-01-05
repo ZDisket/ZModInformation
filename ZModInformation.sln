@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZModInformation", "ZModInformation\ZModInformation.vcxproj", "{9A564817-C8BA-440D-953F-3BA6CEF17FE3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZModInfoTest", "ZModInfoTest\ZModInfoTest.vcxproj", "{F1968893-F322-4783-B1FC-83E123BAEC8B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9A564817-C8BA-440D-953F-3BA6CEF17FE3} = {9A564817-C8BA-440D-953F-3BA6CEF17FE3}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
