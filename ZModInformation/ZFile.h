@@ -1,7 +1,25 @@
 #pragma once
 #include "ZMI_DLL.h"
 
-//* ZFile: Class for reading files
+/*
+######################################
+#
+#
+  ____________ _ _      
+ |___  /  ____(_) |     
+    / /| |__   _| | ___ 
+   / / |  __| | | |/ _ \
+  / /__| |    | | |  __/
+ /_____|_|    |_|_|\___|
+                        
+                        
+########################################
+# Description: Defines ZFile class and stuff
+# Author: ZDisket
+# Copyright (C) 2019 YOUR MOM GAY LOLOLOL
+#######################################
+*/
+
 #include <fstream>
 #include <string>
 #include <vector>
@@ -58,6 +76,8 @@ namespace DataSizes {
 		WCHAR_SIZE = 2
 	};
 }
+
+// ZFile: Class for (mostly binary) file handling.
 class ZMI_API ZFile
 {
 private:
@@ -90,7 +110,7 @@ public:
 	ByteArr ReadEntireFile();
 	
 	// Write with template argument to not pass size.
-	// Only works with Plain Old Datatypes (PODs)
+	// Only works with regular datatypes
     template <typename Dat>
 	void Write(const Dat& dta)
 	{
@@ -100,7 +120,7 @@ public:
 	}
 
 	// Read with template argument to not pass size.
-   // Only works with Plain Old Datatypes (PODs)
+   // Only works with regular datatypes
 	template <typename Dat>
 	void Read(Dat& dta)
 	{

@@ -1,4 +1,23 @@
 #pragma once
+/*
+###################################################
+
+  ____        _
+ |  _ \      | |         /\
+ | |_) |_   _| |_ ___   /  \   _ __ _ __
+ |  _ <| | | | __/ _ \ / /\ \ | '__| '__|
+ | |_) | |_| | ||  __// ____ \| |  | |
+ |____/ \__, |\__\___/_/    \_\_|  |_|
+		 __/ |
+		|___/
+###################################################
+# Description: Holds ByteArr stuff
+# Author: ZDisket
+# Copyright (C) 2019 YOUR MOM GAY LOLOLOL
+####################################################
+*/
+
+
 #include "ZMI_DLL.h"
 #include <string>
 #include <vector>
@@ -75,7 +94,7 @@ public:
 		// Add the size 
 		(*this) << Str.size();
 
-		Add((void*)Str.data(), Str.size());
+		Add((void*)Str.data(), Str.size() * sizeof(Char));
 
 
 	

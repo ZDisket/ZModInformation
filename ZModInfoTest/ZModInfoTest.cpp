@@ -15,6 +15,9 @@ typedef std::vector<String> StringVector;
 typedef unsigned long long uint64_t;
 
 
+/*
+Str8 outta StackOverFlow
+*/
 bool IsBrowsePath(const String& path)
 {
 	return (path == L"." || path == L"..");
@@ -100,6 +103,8 @@ int main()
 	ModInformation Inf2;
 
 	Inf2.Open(foldername + L".zmi");
+
+	// a test to make sure the binary export works
 	ZFile ImgExport;
 	ImgExport.Open(L"fun.jpg", EZFOpenMode::BinaryWrite);
 
