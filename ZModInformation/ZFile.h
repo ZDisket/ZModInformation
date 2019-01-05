@@ -114,23 +114,33 @@ public:
 	// Write a string
 	template<typename chardat>
 	void Write(const std::basic_string<chardat>& Str) {
-		// Write the size first
-		Write(Str.size());
-		Stream.write((char*)Str.data(), Str.size());
+		// Get total len in bytes.
+		const size_t LenInBytes = Str.length() * sizeof(chardat);
+
+		// Write the string length (NOT in bytes)
+		Write(Str.length());
+		Stream.write((char*)Str.data(),LenInBytes);
+		
+		
 	
 	}
 
 	// Read a string
 	template<typename chardat>
 	void Read(std::basic_string<chardat>& Str) {
-		size_t datSz = 0;
-		Read(datSz);
-		chardat* dpBuffer = new chardat[datSz];
+
+		size_t StrLen = 0;
+		Read(StrLen);
+		chardat* dpBuffer = new chardat[StrLen];
 
 
-		Stream.read((char*)dpBuffer, datSz);
+		Stream.read((char*)dpBuffer, sizeof(chardat) * StrLen);
 
-		Str.assign(dpBuffer);
+		// For some reason (witchcraft?) our buffer has more chars in it than we actually allocated, which should be impossible.
+		// Thankfully, std::string's assign function allows for cutting.
+		Str.assign(dpBuffer,0,StrLen);
+
+
 		delete[] dpBuffer;
 
 	}
@@ -138,14 +148,21 @@ public:
 	// Write a vector
 	template<typename vdat>
 	void Write(const std::vector<vdat>& Vec) {
+		// Write size in bytes then vector size.
+	//	const size_t SzInBytes = Vec.size() * sizeof(vdat);
 		Write(Vec.size());
+
+		// Write vector size.
+
 		auto It = Vec.begin();
 		
 		while (It != Vec.end()) {
 			Write(*It);
 			++It;
 		}
+		
 
+		//Stream.write((char*)Vec.data(), SzInBytes);
 	
 	}
 
@@ -176,6 +193,10 @@ public:
 	}
 
 	void operator<<(const ByteArr& BarDat) {
+		if (BarDat.CoData() == NULL) {
+			throw new std::invalid_argument("ZFile tried to write invalid byte array!!");
+		}
+
 		Write(BarDat.Size());
 		Write((void*)BarDat.CoData(), BarDat.Size());
 	

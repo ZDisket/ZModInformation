@@ -39,6 +39,18 @@ ByteArr::ByteArr(BYTE * CopyArr, const size_t & ArrSz)
 
 }
 
+ByteArr::ByteArr(const ByteArr & Cpy)
+{
+	Init();
+	Assign(Cpy);
+}
+
+ByteArr::ByteArr(const std::vector<BYTE>& CpyBv)
+{
+	Init();
+	Assign(CpyBv);
+}
+
 const BYTE * ByteArr::CoData() const
 {
 	return Data;
@@ -54,6 +66,23 @@ void ByteArr::Assign(BYTE * cpyArr, const size_t & cpySz)
 
 	memcpy_s(Data, cpySz, cpyArr, cpySz);
 	DataSz = cpySz;
+
+}
+
+void ByteArr::Assign(const std::vector<BYTE>& CByteVec)
+{
+	CAlloc(CByteVec.size());
+
+	memcpy_s(Data, DataSz, CByteVec.data(), CByteVec.size());
+
+}
+
+void ByteArr::Assign(const ByteArr & CpyByte)
+{
+	CAlloc(CpyByte.Size());
+
+	memcpy_s(Data, DataSz, CpyByte.CoData(), CpyByte.Size());
+
 
 }
 
@@ -90,7 +119,7 @@ ByteArr::~ByteArr()
 	
 	}
 	catch (...) {
-	
+	// Who the hell gives a shit about exceptions here???
 	
 	}
 

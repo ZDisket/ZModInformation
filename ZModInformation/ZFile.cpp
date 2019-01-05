@@ -70,6 +70,7 @@ INT64 ZFile::GetFileLength()
 void ZFile::Read(void * out, const INT64 & count)
 {
 	Stream.read((char*)out, count);
+
 }
 
 void ZFile::Write(void * in, const INT64 & incount)

@@ -1,6 +1,7 @@
 #pragma once
 #include "ZMI_DLL.h"
 #include <string>
+#include <vector>
 // Incomplete class meant to simplify interactions with dynamic size byte arrays
 // Right now it can only safely store
 
@@ -20,7 +21,10 @@ public:
 	ByteArr();
 	// Create a new byte arr by copying and REPLACING the contents
 	ByteArr(BYTE* CopyArr, const size_t& ArrSz);
+	// Create a byte array from another byte array
+	ByteArr(const ByteArr& Cpy);
 
+	ByteArr(const std::vector<BYTE>& CpyBv);
 	
 	// Get a const reference to the raw array
 	const BYTE* CoData() const;
@@ -29,6 +33,12 @@ public:
 
 	// Assign a raw BYTE* by copy and REPLACE the contents
 	void Assign(BYTE* cpyArr, const size_t& cpySz);
+
+	// Assign a vector of bytes.
+	void Assign(const std::vector<BYTE>& CByteVec);
+
+	// Assign a byte array and copy contents.
+	void Assign(const ByteArr& CpyByte);
 
 	// Get the size of the array
 	inline size_t Size() const { return DataSz; }

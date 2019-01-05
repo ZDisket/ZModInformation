@@ -82,7 +82,7 @@ int main()
 
 	Info1.SetBasicInfo(Track);
 
-	Info1.GetZipData().Assign(Buf.data(), Buf.size());
+	Info1.GetZipData().Assign(Buf);
 	
 
 	ZFile Image;
@@ -90,7 +90,7 @@ int main()
 		return -1;
 
 	ByteArr ImgDa = Image.ReadEntireFile();
-	Info1.GetImageData().Assign(ImgDa.GetData(), ImgDa.Size());
+	Info1.GetImageData().Assign(ImgDa);
 
 	Image.Close();
 
@@ -100,6 +100,12 @@ int main()
 	ModInformation Inf2;
 
 	Inf2.Open(foldername + L".zmi");
+	ZFile ImgExport;
+	ImgExport.Open(L"fun.jpg", EZFOpenMode::BinaryWrite);
+
+	ImgExport.Write(Inf2.GetImageData());
+
+	ImgExport.Close();
 
    
 	ByteVec ByvImg(Inf2.GetZipData().GetData(), Inf2.GetZipData().GetData() + Inf2.GetZipData().Size());
