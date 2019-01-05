@@ -175,7 +175,6 @@ public:
 	template<typename vdat>
 	void Write(const std::vector<vdat>& Vec) {
 		// Write size in bytes then vector size.
-	//	const size_t SzInBytes = Vec.size() * sizeof(vdat);
 		Write(Vec.size());
 
 		// Write vector size.
@@ -188,7 +187,6 @@ public:
 		}
 		
 
-		//Stream.write((char*)Vec.data(), SzInBytes);
 	
 	}
 

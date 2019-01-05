@@ -1,7 +1,25 @@
 #pragma once
 #include "ZMI_DLL.h"
 
-//* ZFile: Class for reading files
+/*
+######################################
+#
+#
+  ____________ _ _      
+ |___  /  ____(_) |     
+    / /| |__   _| | ___ 
+   / / |  __| | | |/ _ \
+  / /__| |    | | |  __/
+ /_____|_|    |_|_|\___|
+                        
+                        
+########################################
+# Description: Defines ZFile class and stuff
+# Author: ZDisket
+# Copyright (C) 2019 YOUR MOM GAY LOLOLOL
+#######################################
+*/
+
 #include <fstream>
 #include <string>
 #include <vector>
@@ -58,6 +76,9 @@ namespace DataSizes {
 		WCHAR_SIZE = 2
 	};
 }
+
+// ZFile: Class for (mostly binary) file handling.
+// Cannot be copied
 class ZMI_API ZFile
 {
 private:
@@ -70,6 +91,11 @@ private:
 	int EZFOpenModeToIos(const EZFOpenMode::Enum& input);
 
 public:
+	ZFile();
+
+	ZFile(const std::wstring& coFileName, const EZFOpenMode::Enum& Mode);
+	ZFile(const std::string& coFName, const EZFOpenMode::Enum& coMode);
+
 	bool Open(const std::string& in_sFileName,const EZFOpenMode::Enum& in_Mode);
 	bool Open(const std::wstring& in_sFileName, const EZFOpenMode::Enum& in_Mode);
 
@@ -90,7 +116,7 @@ public:
 	ByteArr ReadEntireFile();
 	
 	// Write with template argument to not pass size.
-	// Only works with Plain Old Datatypes (PODs)
+	// Only works with regular datatypes
     template <typename Dat>
 	void Write(const Dat& dta)
 	{
@@ -100,7 +126,7 @@ public:
 	}
 
 	// Read with template argument to not pass size.
-   // Only works with Plain Old Datatypes (PODs)
+   // Only works with regular datatypes
 	template <typename Dat>
 	void Read(Dat& dta)
 	{
@@ -149,7 +175,6 @@ public:
 	template<typename vdat>
 	void Write(const std::vector<vdat>& Vec) {
 		// Write size in bytes then vector size.
-	//	const size_t SzInBytes = Vec.size() * sizeof(vdat);
 		Write(Vec.size());
 
 		// Write vector size.
@@ -162,7 +187,6 @@ public:
 		}
 		
 
-		//Stream.write((char*)Vec.data(), SzInBytes);
 	
 	}
 
@@ -223,7 +247,6 @@ public:
 	void Close();
 
 
-	ZFile();
 	~ZFile();
 };
 

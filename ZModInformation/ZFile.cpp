@@ -94,7 +94,7 @@ ByteArr ZFile::ReadEntireFile()
 	ByteArr ArrRet;
 
 	Stream.seekg(0, Stream.end);
-	size_t length = Stream.tellg();
+	INT64 length = Stream.tellg();
 	Stream.seekg(0, Stream.beg);
 	ArrRet.CAlloc(length);
 

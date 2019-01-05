@@ -63,7 +63,7 @@ int main()
 	ModInformation Info1;
 	const wstring foldername = L"A World DIvided";
 	ByteVec Buf;
-	Buf.reserve(CalculateDirSize(foldername));
+	Buf.reserve((size_t)CalculateDirSize(foldername));
 
 	Zipper Zip1(Buf);
 
@@ -113,8 +113,8 @@ int main()
 	ImgExport.Close();
 
    
-	ByteVec ByvImg(Inf2.GetZipData().GetData(), Inf2.GetZipData().GetData() + Inf2.GetZipData().Size());
-	Unzipper Unz1(ByvImg);
+	ByteVec By = Inf2.GetZipData().ToVector();
+	Unzipper Unz1(By);
 
 	Unz1.extract("Fishes");
 

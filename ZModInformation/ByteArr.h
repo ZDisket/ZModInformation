@@ -83,7 +83,7 @@ public:
 
 	// REPLACE the array and allocate a new one with specified size.
 	void CAlloc(const size_t& SetSize);
-
+	inline void CAlloc(const INT64& SetSz) { CAlloc((size_t)SetSz); }
 	// Add a simple data type to the bytearr
 	template<typename Ty>
 	void operator<<(const Ty& In) {
