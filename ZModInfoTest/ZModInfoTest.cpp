@@ -59,8 +59,8 @@ uint64_t CalculateDirSize(const String &path, StringVector *errVect = NULL, uint
 
 int main()
 {
-	
-	ModInformation Info1;
+/*
+ModInformation Info1;
 	const wstring foldername = L"A World DIvided";
 	ByteVec Buf;
 	Buf.reserve((size_t)CalculateDirSize(foldername));
@@ -86,7 +86,7 @@ int main()
 	Info1.SetBasicInfo(Track);
 
 	Info1.GetZipData().Assign(Buf);
-	
+
 
 	ZFile Image;
 	if (!Image.Open(foldername + L"\\photo.jpg", EZFOpenMode::BinaryRead))
@@ -112,11 +112,49 @@ int main()
 
 	ImgExport.Close();
 
-   
+
 	ByteVec By = Inf2.GetZipData().ToVector();
 	Unzipper Unz1(By);
 
 	Unz1.extract("Fishes");
+
+
+
+
+*/
+
+	ModInformation InfEx;
+	InfEx.Open(L"A World DIvided.zmi");
+	ZModInfo Info = InfEx.GetBasicInfo();
+
+	cout << "Opening mod" << endl;
+	wcout << L"Mod name: " << Info.ModName << endl;
+	wcout << L"Mod description: " << Info.ModDescription << endl;
+	wcout << L"Version: " << Info.ModVersion << endl;
+
+
+
+
+	cout << "Mod authors: " << endl;
+
+	auto It = Info.ModAuthors.begin();
+
+	while (It != Info.ModAuthors.end())
+	{
+		
+		wcout << *It << endl;
+		++It;
+	}
+
+	wcout << L"Extracting mod files..." << endl;
+	
+	ByteVec Byv = InfEx.GetZipData().ToVector();
+	Unzipper Unz(Byv);
+	Unz.extract();
+
+	wcout << L" Done! " << endl;
+
+	system("pause");
 
 
 	return 0;
