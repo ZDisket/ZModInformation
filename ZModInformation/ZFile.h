@@ -192,13 +192,16 @@ public:
 	
 	}
 
+	// Write a Byte Array RAW into the file, without the size. Useful for exporting
+	void Write(const ByteArr& BrDat);
+
 	void operator<<(const ByteArr& BarDat) {
 		if (BarDat.CoData() == NULL) {
 			throw new std::invalid_argument("ZFile tried to write invalid byte array!!");
 		}
 
 		Write(BarDat.Size());
-		Write((void*)BarDat.CoData(), BarDat.Size());
+		Stream.write((const char*)BarDat.CoData(), BarDat.Size());
 	
 	}
 	// Read to a byte array. Note: DELETES AND REPLACES THE ALREADY EXISTING CONTENTS THERE!!
@@ -206,7 +209,7 @@ public:
 		size_t BaSz = 0;
 		Read(BaSz);
 		BarDat.CAlloc(BaSz);
-		Write((void*)BarDat.GetData(), BaSz);
+		Stream.read((char*)BarDat.GetData(), BaSz);
 
 	}
 

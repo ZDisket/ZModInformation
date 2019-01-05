@@ -95,6 +95,11 @@ ByteArr ZFile::ReadEntireFile()
 
 }
 
+void ZFile::Write(const ByteArr & BrDat)
+{
+	Stream.write((const char*)BrDat.CoData(), BrDat.Size());
+}
+
 void ZFile::Close()
 {
 	Stream.close();
