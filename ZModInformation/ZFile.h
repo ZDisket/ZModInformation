@@ -78,6 +78,7 @@ namespace DataSizes {
 }
 
 // ZFile: Class for (mostly binary) file handling.
+// Cannot be copied
 class ZMI_API ZFile
 {
 private:
@@ -90,6 +91,11 @@ private:
 	int EZFOpenModeToIos(const EZFOpenMode::Enum& input);
 
 public:
+	ZFile();
+
+	ZFile(const std::wstring& coFileName, const EZFOpenMode::Enum& Mode);
+	ZFile(const std::string& coFName, const EZFOpenMode::Enum& coMode);
+
 	bool Open(const std::string& in_sFileName,const EZFOpenMode::Enum& in_Mode);
 	bool Open(const std::wstring& in_sFileName, const EZFOpenMode::Enum& in_Mode);
 
@@ -243,7 +249,6 @@ public:
 	void Close();
 
 
-	ZFile();
 	~ZFile();
 };
 

@@ -32,6 +32,12 @@ ByteArr::ByteArr()
 	Init();
 }
 
+ByteArr::ByteArr(const size_t & InitSz)
+{
+	Init();
+	CAlloc(InitSz);
+}
+
 ByteArr::ByteArr(BYTE * CopyArr, const size_t & ArrSz)
 {
 	Init();
@@ -49,6 +55,12 @@ ByteArr::ByteArr(const std::vector<BYTE>& CpyBv)
 {
 	Init();
 	Assign(CpyBv);
+}
+
+std::vector<BYTE> ByteArr::ToVector()
+{
+	return std::vector<BYTE>(Data, Data + DataSz);
+
 }
 
 const BYTE * ByteArr::CoData() const

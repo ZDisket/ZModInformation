@@ -21,10 +21,12 @@
 #include "ZMI_DLL.h"
 #include <string>
 #include <vector>
-// Incomplete class meant to simplify interactions with dynamic size byte arrays
-// Right now it can only safely store
+
 
 typedef unsigned char BYTE;
+
+// Incomplete class meant to simplify interactions with dynamic size byte arrays
+// Right now it can only safely store
 class ZMI_API ByteArr
 {
 private:
@@ -38,12 +40,20 @@ private:
 
 public:
 	ByteArr();
+
+	// Initialize with a certain size.
+	ByteArr(const size_t& InitSz);
+
 	// Create a new byte arr by copying and REPLACING the contents
 	ByteArr(BYTE* CopyArr, const size_t& ArrSz);
 	// Create a byte array from another byte array
 	ByteArr(const ByteArr& Cpy);
 
+	// Create a byte array from a vector of bytes
 	ByteArr(const std::vector<BYTE>& CpyBv);
+
+	// Copy the Byte Array into a vector.
+	std::vector<BYTE> ToVector();
 	
 	// Get a const reference to the raw array
 	const BYTE* CoData() const;

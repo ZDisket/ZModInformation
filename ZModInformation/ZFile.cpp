@@ -16,6 +16,15 @@ int ZFile::EZFOpenModeToIos(const EZFOpenMode::Enum & input)
 	return ios::in | ios::binary;
 
 }
+ZFile::ZFile(const std::wstring & coFileName, const EZFOpenMode::Enum & Mode)
+{
+	Open(coFileName, Mode);
+}
+ZFile::ZFile(const std::string & coFName, const EZFOpenMode::Enum & coMode)
+{
+	Open(coFName, coMode);
+}
+
 bool ZFile::Open(const std::string & in_sFileName, const EZFOpenMode::Enum & in_Mode)
 {
 	OpenMode = in_Mode;
