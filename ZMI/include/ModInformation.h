@@ -76,7 +76,7 @@ private:
 	double ModVersion;
 
 	
-	SItemW ModFolder;
+	std::vector<SItemW> ModFolder;
 
 	// Image
 	ByteArr ImgData;
@@ -94,6 +94,10 @@ public:
 
 	ByteArr& GetImageData() { return ImgData; }
 	ByteArr& GetZipData() { return ZipData; }
+
+	std::vector<SItemW>& GetFileSysData() { return ModFolder; }
+
+	void SetModFolder(const std::wstring& Folder);
 
 	~ModInformation();
 };

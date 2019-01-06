@@ -99,6 +99,11 @@ void ModInformation::SetBasicInfo(const ZModInfo & Minf)
 }
 
 
+void ModInformation::SetModFolder(const std::wstring & Folder)
+{
+	ModFolder = FileSys.RecursiveStuffInDirectory(Folder);
+}
+
 ModInformation::~ModInformation()
 {
 	

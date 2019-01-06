@@ -8,6 +8,7 @@
 #include <ZipperInclude.hpp>
 #include <ZFile.h>
 
+
 using namespace std;
 using namespace zipper;
 typedef std::vector<BYTE> ByteVec;
@@ -58,9 +59,12 @@ uint64_t CalculateDirSize(const String &path, StringVector *errVect = NULL, uint
 	return size;
 }
 
+
+
+
 int main()
 {
-/*
+
 ModInformation Info1;
 	const wstring foldername = L"A World DIvided";
 	ByteVec Buf;
@@ -86,6 +90,7 @@ ModInformation Info1;
 
 	Info1.SetBasicInfo(Track);
 
+	
 	Info1.GetZipData().Assign(Buf);
 
 
@@ -97,32 +102,16 @@ ModInformation Info1;
 	Info1.GetImageData().Assign(ImgDa);
 
 	Image.Close();
-
+	Info1.SetModFolder(foldername);
 	Info1.Save(foldername + L".zmi");
 
 
-	ModInformation Inf2;
-
-	Inf2.Open(foldername + L".zmi");
-
-	// a test to make sure the binary export works
-	ZFile ImgExport;
-	ImgExport.Open(L"fun.jpg", EZFOpenMode::BinaryWrite);
-
-	ImgExport.Write(Inf2.GetImageData());
-
-	ImgExport.Close();
-
-
-	ByteVec By = Inf2.GetZipData().ToVector();
-	Unzipper Unz1(By);
-
-	Unz1.extract("Fishes");
+	
 
 
 
 
-*/
+
 
 	ModInformation InfEx;
 	InfEx.Open(L"A World DIvided.zmi");
