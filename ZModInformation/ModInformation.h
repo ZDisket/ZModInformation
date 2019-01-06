@@ -23,8 +23,8 @@
 #include <string>
 #include <vector>
 #include "ByteArr.h"
-
 #include "ZDFS.h"
+
 /*
 zmi modinfo struc:
 short fversion

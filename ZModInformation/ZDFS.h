@@ -16,15 +16,16 @@
 * ===================================================================== 
 */
 
+#ifdef ZDFS_MAN_INCLUDE
 #include <iostream>
 #include <string>
 #include <vector>
-#include <Windows.h>
+//#include <Windows.h>
 #include <Shlwapi.h>
 #include <Shlobj.h>
 #include <Shlobj_core.h>
 
-
+#endif
 
 // Size of char to alloc to use RelativeToFullPath. 
 // Only change if you're having trouble and it includes long paths.
@@ -34,7 +35,6 @@
 typedef bool Type;
 #define ZFS_TFOLDER true
 #define ZFS_TFILE false
-
 struct FAttrib {
 	// Note: If this is true, then it shouldn't have any of the other attributes
 	bool Normal;
