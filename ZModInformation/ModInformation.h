@@ -23,6 +23,8 @@
 #include <string>
 #include <vector>
 #include "ByteArr.h"
+
+#include "ZDFS.h"
 /*
 zmi modinfo struc:
 short fversion
@@ -64,14 +66,17 @@ class ZMI_API ModInformation
 {
 private:
 
-
-	const short FVersion = 1;
-
+	
+	const short FVersion = 2;
+	ZDFS FileSys;
 	// Basic data
 	std::wstring Name;
 	std::wstring Description;
 	std::vector<std::wstring> Authors;
 	double ModVersion;
+
+	
+	SItemW ModFolder;
 
 	// Image
 	ByteArr ImgData;

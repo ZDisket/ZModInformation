@@ -42,6 +42,8 @@ ZMIErrorCodes::Enum ModInformation::Open(const std::wstring & inName)
 	File >> ImgData;
 
 	File >> ZipData;
+
+	File >> ModFolder;
 	
 	File.Close();
 
@@ -67,6 +69,8 @@ ZMIErrorCodes::Enum ModInformation::Save(const std::wstring & inName)
 	sFile << ImgData;
 
 	sFile << ZipData;
+
+	sFile << ModFolder;
 	
 	sFile.Close();
 

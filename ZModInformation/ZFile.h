@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 
-
+#include "ZDFS.h"
 #include "ByteArr.h"
 /*
 
@@ -182,7 +182,7 @@ public:
 		auto It = Vec.begin();
 		
 		while (It != Vec.end()) {
-			Write(*It);
+			(*this) << *It;
 			++It;
 		}
 		
@@ -201,7 +201,7 @@ public:
 		size_t i = 0;
 
 		while (i != vSz) {
-			Read(Vec[i]);
+			(*this) >> Vec[i];
 		
 			++i;
 		}
@@ -237,6 +237,87 @@ public:
 
 	}
 
+	void operator>>(FAttrib& ExAtr) {
+		Read(ExAtr.Archive);
+		Read(ExAtr.Compressed);
+		Read(ExAtr.Hidden);
+		Read(ExAtr.Normal);
+		Read(ExAtr.ReadOnly);
+		Read(ExAtr.System);
+		Read(ExAtr.Temporary);
+	}
+	void operator >>(SYSTEMTIME& SysTime) {
+		// Convert it to file time to export easier;
+		FILETIME TimeC;
+
+		(*this) >> TimeC.dwHighDateTime;
+		(*this) >> TimeC.dwLowDateTime;
+
+		FileTimeToSystemTime(&TimeC, &SysTime);
+
+
+	}
+
+	void operator>>(SItemW& ItemEx) {
+		// read our attributes
+		(*this) >> ItemEx.Attributes;
+
+		// read basic data
+
+		Read(ItemEx.FileSzHigh);
+		Read(ItemEx.FileSzLow);
+		Read(ItemEx.IType);
+
+		(*this) >> ItemEx.LastAccessTime;
+		(*this) >> ItemEx.LastWriteTime;
+
+		(*this) >> ItemEx.Name;
+		(*this) >> ItemEx.TimeOfCreation;
+
+		(*this) >> ItemEx.SubEntries;
+
+
+	}
+	void operator<<(const FAttrib& Atr) {
+		Write(Atr.Archive);
+		Write(Atr.Compressed);
+		Write(Atr.Hidden);
+		Write(Atr.Normal);
+		Write(Atr.ReadOnly);
+		Write(Atr.System);
+		Write(Atr.Temporary);
+
+	}
+	void operator<<(const SYSTEMTIME& SysTime) {
+		// Convert it to file time to export easier;
+		FILETIME TimeC;
+		SystemTimeToFileTime(&SysTime, &TimeC);
+
+		(*this) << TimeC.dwHighDateTime;
+		(*this) << TimeC.dwLowDateTime;
+	
+	}
+	void operator<<(const SItemW& ItemEx) {
+		// Write our attributes
+		(*this) << ItemEx.Attributes;
+		
+		// Write basic data
+
+		Write(ItemEx.FileSzHigh);
+		Write(ItemEx.FileSzLow);
+		Write(ItemEx.IType);
+		
+		(*this) << ItemEx.LastAccessTime;
+		(*this) << ItemEx.LastWriteTime;
+
+		(*this) << ItemEx.Name;
+		(*this) << ItemEx.TimeOfCreation;
+
+		// Write subentries
+		(*this) << ItemEx.SubEntries;
+
+
+	}
 
 
 	template<typename MTy>

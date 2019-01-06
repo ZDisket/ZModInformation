@@ -7,6 +7,7 @@
 #include <ZMI_DLL.h>
 #include <ZipperInclude.hpp>
 #include <ZFile.h>
+
 using namespace std;
 using namespace zipper;
 typedef std::vector<BYTE> ByteVec;
