@@ -26,6 +26,9 @@
 
 #include "ZDFS.h"
 #include "ByteArr.h"
+
+// FStream that works with bytes
+typedef std::basic_fstream<BYTE,std::char_traits<BYTE>> ufstream;
 /*
 
 __if_not_exists (INT64) {
@@ -84,7 +87,7 @@ class ZMI_API ZFile
 private:
 	BYTE * m_pData;
 	bool FileOpened;
-	std::fstream Stream;
+	ufstream Stream;
 
 	EZFOpenMode::Enum OpenMode;
 
@@ -120,7 +123,7 @@ public:
     template <typename Dat>
 	void Write(const Dat& dta)
 	{
-		Stream.write((char*)&dta, sizeof(dta));
+		Stream.write((BYTE*)&dta, sizeof(dta));
 		
 	
 	}
@@ -130,7 +133,7 @@ public:
 	template <typename Dat>
 	void Read(Dat& dta)
 	{
-		Stream.read((char*)&dta, sizeof(dta));
+		Stream.read((BYTE*)&dta, sizeof(dta));
 
 
 	}
@@ -145,7 +148,7 @@ public:
 
 		// Write the string length (NOT in bytes)
 		Write(Str.length());
-		Stream.write((char*)Str.data(),LenInBytes);
+		Stream.write((BYTE*)Str.data(),LenInBytes);
 		
 		
 	
@@ -160,7 +163,7 @@ public:
 		chardat* dpBuffer = new chardat[StrLen];
 
 
-		Stream.read((char*)dpBuffer, sizeof(chardat) * StrLen);
+		Stream.read((BYTE*)dpBuffer, sizeof(chardat) * StrLen);
 
 		// For some reason (witchcraft?) our buffer has more chars in it than we actually allocated, which should be impossible.
 		// Thankfully, std::string's assign function allows for cutting.
@@ -225,7 +228,7 @@ public:
 		}
 
 		Write(BarDat.Size());
-		Stream.write((const char*)BarDat.CoData(), BarDat.Size());
+		Stream.write(BarDat.CoData(), BarDat.Size());
 	
 	}
 	// Read to a byte array. Note: DELETES AND REPLACES THE ALREADY EXISTING CONTENTS THERE!!

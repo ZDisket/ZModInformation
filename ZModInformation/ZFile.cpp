@@ -78,13 +78,13 @@ INT64 ZFile::GetFileLength()
 
 void ZFile::Read(void * out, const INT64 & count)
 {
-	Stream.read((char*)out, count);
+	Stream.read((BYTE*)out, count);
 
 }
 
 void ZFile::Write(void * in, const INT64 & incount)
 {
-	Stream.write((char*)in, incount);
+	Stream.write((BYTE*)in, incount);
 	
 }
 
@@ -98,7 +98,7 @@ ByteArr ZFile::ReadEntireFile()
 	Stream.seekg(0, Stream.beg);
 	ArrRet.CAlloc(length);
 
-	Stream.read((char*)ArrRet.GetData(), length);
+	Stream.read(ArrRet.GetData(), length);
 	
 	return ArrRet;
 
@@ -106,7 +106,7 @@ ByteArr ZFile::ReadEntireFile()
 
 void ZFile::Write(const ByteArr & BrDat)
 {
-	Stream.write((const char*)BrDat.CoData(), BrDat.Size());
+	Stream.write(BrDat.CoData(), BrDat.Size());
 }
 
 void ZFile::Close()
@@ -202,7 +202,7 @@ void ZFile::operator>>(ByteArr& BarDat) {
 	size_t BaSz = 0;
 	Read(BaSz);
 	BarDat.CAlloc(BaSz);
-	Stream.read((char*)BarDat.GetData(), BaSz);
+	Stream.read(BarDat.GetData(), BaSz);
 
 }
 

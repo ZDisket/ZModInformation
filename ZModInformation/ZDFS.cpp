@@ -90,8 +90,10 @@ void ZDFS::EvalAddItemW(const WIN32_FIND_DATAW & in_FinData, std::vector<SItemW>
 
 	if (Item.Name == L".." || Item.Name == L".") { return; }
 
-	if (in_FinData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) { Item.IType = ZFS_TFOLDER; }
-	else { Item.IType = ZFS_TFILE; }
+	if (in_FinData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+		Item.IType = ZFS_TFOLDER;
+	else
+		Item.IType = ZFS_TFILE; 
 
 	// Fill out attributes
 
@@ -285,7 +287,7 @@ std::vector<SItemW> ZDFS::RecursiveStuffInDirectory(const std::wstring & in_sPat
 	while (DIt != l_vStuff.end()) {
 		SItemW& Item = *DIt;
 
-		if (Item.IType = ZFS_TFOLDER)
+		if (Item.IType == ZFS_TFOLDER)
 			Item.SubEntries = RecursiveStuffInDirectory(in_sPath + L"\\" + Item.Name);
 
 		++DIt;

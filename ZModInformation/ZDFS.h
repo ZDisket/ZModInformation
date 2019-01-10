@@ -80,6 +80,24 @@ struct SItemW // Unicode verstion of struct that indicates anything found by Stu
 
 	// Only has stuff if it was created by RecursiveStuffInDirectory()
 	std::vector<SItemW> SubEntries;
+
+	SItemW() {
+
+	}
+	SItemW(const SItemW& Copy) {
+		IType = Copy.IType;
+		Name = Copy.Name;
+		Attributes = Copy.Attributes;
+
+		FileSzHigh = Copy.FileSzHigh;
+		FileSzLow = Copy.FileSzLow;
+
+		TimeOfCreation = Copy.TimeOfCreation;
+		LastAccessTime = Copy.LastAccessTime;
+		LastWriteTime = Copy.LastWriteTime;
+
+	}
+
 };
 
 
