@@ -98,6 +98,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <Version>1.28</Version>
     </Link>
     <CustomBuildStep>
       <Message>Copying to places...</Message>
@@ -131,6 +132,7 @@ copy /Y $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)ZMI\dll\</Command>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <Version>1.28</Version>
     </Link>
     <CustomBuildStep>
       <Message>Copying to places...</Message>
@@ -167,6 +169,7 @@ copy /Y $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)ZMI\dll\</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <Version>1.28</Version>
     </Link>
     <PostBuildEvent>
       <Command>echo 1 COPY LIB
@@ -200,6 +203,7 @@ copy /Y $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)ZMI\dll\</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <Version>1.28</Version>
     </Link>
     <PostBuildEvent>
       <Command>echo 1 COPY LIB

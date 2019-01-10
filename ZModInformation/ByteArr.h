@@ -24,6 +24,7 @@
 
 
 typedef unsigned char BYTE;
+typedef long long INT64;
 
 // Incomplete class meant to simplify interactions with dynamic size byte arrays
 // Right now it can only safely store

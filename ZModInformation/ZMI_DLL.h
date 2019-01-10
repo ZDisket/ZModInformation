@@ -6,7 +6,10 @@
 #else
        // God has spoken. He has come to bless your code with His divine macro.
 #define ZMI_API __declspec(dllimport)
+
+#ifndef ZDFS_MAN_INCLUDE
 #define ZDFS_MAN_INCLUDE
+#endif
 
 #ifdef _DEBUG
 #pragma comment(lib,"ZModInformation_d.lib")

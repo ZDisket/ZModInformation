@@ -96,6 +96,7 @@ struct SItemW // Unicode verstion of struct that indicates anything found by Stu
 		LastAccessTime = Copy.LastAccessTime;
 		LastWriteTime = Copy.LastWriteTime;
 
+		SubEntries = Copy.SubEntries;
 	}
 
 };
