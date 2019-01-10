@@ -32,9 +32,9 @@
 #define RTF_ALLOC_SZ 4096
 #define ALLF "*"
 #define WALLF L"*"
-typedef bool Type;
-#define ZFS_TFOLDER true
-#define ZFS_TFILE false
+typedef short Type;
+#define ZFS_TFOLDER 1
+#define ZFS_TFILE 0
 struct FAttrib {
 	// Note: If this is true, then it shouldn't have any of the other attributes
 	bool Normal;

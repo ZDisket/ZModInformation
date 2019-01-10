@@ -4,6 +4,7 @@
 #ifdef ZMI_EXPORT
 #define ZMI_API __declspec(dllexport)
 #else
+       // God has spoken. He has come to bless your code with His divine macro.
 #define ZMI_API __declspec(dllimport)
 #define ZDFS_MAN_INCLUDE
 
