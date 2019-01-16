@@ -29,25 +29,7 @@
 
 // FStream that works with bytes
 typedef std::basic_fstream<BYTE,std::char_traits<BYTE>> ufstream;
-/*
 
-__if_not_exists (INT64) {
-#ifndef INT64
-#define INT64 long long
-#endif // !INT64
-
-};
-
-__if_not_exists (BYTE) {
-
-#ifndef BYTE
-#define BYTE unsigned char
-#endif // !BYTE
-
-};
-
-
-*/
 
 
 

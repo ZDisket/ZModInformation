@@ -102,3 +102,41 @@ public:
 	~ModInformation();
 };
 
+/*For loading simple Mod Information (.mi) files. */
+namespace SiModInfo {
+	struct ModInfo {
+		ZModInfo BasicInfo;
+		ByteArr ImgData;
+
+		ModInfo() {
+			
+		}
+
+		ModInfo(const ModInfo& cpy) {
+			BasicInfo = cpy.BasicInfo;
+			if (cpy.ImgData.Size())
+				ImgData.Assign(cpy.ImgData);
+
+		}
+
+		ModInfo(ModInformation& Minf) {
+			BasicInfo = Minf.GetBasicInfo();
+
+			if (Minf.GetImageData().Size())
+				ImgData.Assign(Minf.GetImageData());
+
+
+		}
+
+		ZModInfo GetBasic() const {
+			return BasicInfo;
+		};
+
+		const ByteArr& GetImage() const{
+			return ImgData;
+		}
+	};
+
+	bool ZMI_API OpenMI(const std::wstring& FName,ModInfo& out_Info);
+	bool ZMI_API SaveMI(const std::wstring& outName, const ModInfo& in_SaveInfo);
+}

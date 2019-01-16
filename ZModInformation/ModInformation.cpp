@@ -109,3 +109,44 @@ ModInformation::~ModInformation()
 	
 
 }
+
+bool ZMI_API SiModInfo::OpenMI(const std::wstring & FName, ModInfo & out_Info)
+{
+	ZFile MiOpen;
+	if (!MiOpen.Open(FName, EZFOpenMode::BinaryRead))
+		return false;
+
+	MiOpen >> out_Info.BasicInfo.ModAuthors;
+	MiOpen >> out_Info.BasicInfo.ModDescription;
+	MiOpen >> out_Info.BasicInfo.ModName;
+	MiOpen >> out_Info.BasicInfo.ModVersion;
+
+	MiOpen >> out_Info.ImgData;
+
+	MiOpen.Close();
+
+	return true;
+
+
+}
+
+bool ZMI_API SiModInfo::SaveMI(const std::wstring & outName, const ModInfo & in_SaveInfo)
+{
+	ZFile MiSave;
+
+	if (!MiSave.Open(outName, EZFOpenMode::BinaryWrite))
+		return false;
+
+	ZModInfo Basic = in_SaveInfo.GetBasic();
+
+	MiSave << Basic.ModAuthors;
+	MiSave << Basic.ModDescription;
+	MiSave << Basic.ModName;
+	MiSave << Basic.ModVersion;
+
+	MiSave << in_SaveInfo.GetImage();
+
+	MiSave.Close();
+
+	return true;
+}
