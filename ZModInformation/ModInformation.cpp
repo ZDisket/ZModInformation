@@ -2,23 +2,6 @@
 #include "ModInformation.h"
 #include "ZFile.h"
 
-/*
-zmi modinfo struc:
-short fversion
-
-wstring name
-wstring description
-wstringvec authors
-double version
-
-int64 imgdatasz
-BYTE[] imgData // Will be QImage data later on
-
-int64 zipsz
-BYTE[] zipdata
-
-*/
-
 ModInformation::ModInformation()
 {
 	
@@ -31,19 +14,31 @@ ZMIErrorCodes::Enum ModInformation::Open(const std::wstring & inName)
 	if (!File.Open(inName, EZFOpenMode::BinaryRead)) {
 		return ZMIErrorCodes::CannotOpenFile;
 	}
-
-	File >> FVersion;
+	short CurrentVer = 0;
+	File >> CurrentVer;
 
 	File >> Name;
 	File >> Description;
 	File >> Authors;
 	File >> ModVersion;
+	try {
+		File >> ImgData;
 
-	File >> ImgData;
+		File >> ZipData;
 
-	File >> ZipData;
+	}
+	catch (...) {
+		return ZMIErrorCodes::InvalidFile;
+	}
+
 
 	File >> ModFolder;
+
+	if (CurrentVer > 2)
+		File >> ModFilesSize;
+	else
+		ModFilesSize = FileSys.GetSize(ModFolder);
+
 	
 	File.Close();
 
@@ -71,6 +66,7 @@ ZMIErrorCodes::Enum ModInformation::Save(const std::wstring & inName)
 	sFile << ZipData;
 
 	sFile << ModFolder;
+	sFile << ModFilesSize;
 	
 	sFile.Close();
 
@@ -102,6 +98,8 @@ void ModInformation::SetBasicInfo(const ZModInfo & Minf)
 void ModInformation::SetModFolder(const std::wstring & Folder)
 {
 	ModFolder = FileSys.RecursiveStuffInDirectory(Folder);
+	ModFilesSize = FileSys.GetSize(ModFolder);
+
 }
 
 ModInformation::~ModInformation()
@@ -122,6 +120,7 @@ bool ZMI_API SiModInfo::OpenMI(const std::wstring & FName, ModInfo & out_Info)
 	MiOpen >> out_Info.BasicInfo.ModVersion;
 
 	MiOpen >> out_Info.ImgData;
+	MiOpen >> out_Info.FolderSz;
 
 	MiOpen.Close();
 
@@ -145,6 +144,7 @@ bool ZMI_API SiModInfo::SaveMI(const std::wstring & outName, const ModInfo & in_
 	MiSave << Basic.ModVersion;
 
 	MiSave << in_SaveInfo.GetImage();
+	MiSave << in_SaveInfo.GetFolderSz();
 
 	MiSave.Close();
 

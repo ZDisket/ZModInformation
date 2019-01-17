@@ -22,7 +22,7 @@
 #include <string>
 #include <vector>
 
-
+typedef std::vector<BYTE> ByteVec;
 typedef unsigned char BYTE;
 typedef long long INT64;
 

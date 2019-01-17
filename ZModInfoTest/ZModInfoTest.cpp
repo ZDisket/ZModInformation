@@ -121,7 +121,7 @@ ModInformation Info1;
 	wcout << L"Mod name: " << Info.ModName << endl;
 	wcout << L"Mod description: " << Info.ModDescription << endl;
 	wcout << L"Version: " << Info.ModVersion << endl;
-
+	wcout << L"Mod folder sz: " << InfEx.GetTotalSize();
 
 
 

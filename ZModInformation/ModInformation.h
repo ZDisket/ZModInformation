@@ -25,23 +25,6 @@
 #include "ByteArr.h"
 #include "ZDFS.h"
 
-/*
-zmi modinfo struc:
-short fversion
-
-wstring name
-wstring description
-wstringvec authors
-double version
-
-int64 imgdatasz
-BYTE[] imgData // Will be QImage data later on
-
-int64 zipsz
-BYTE[] zipdata
-
-*/
-
 
 struct ZModInfo {
 	
@@ -66,8 +49,10 @@ class ZMI_API ModInformation
 {
 private:
 
-	
-	const short FVersion = 2;
+	// Version history:
+	// 2
+	// 3: Added mod folder size
+	const short FVersion = 3;
 	ZDFS FileSys;
 	// Basic data
 	std::wstring Name;
@@ -84,6 +69,8 @@ private:
 	// Files
 	ByteArr ZipData;
 
+	UINT64 ModFilesSize;
+
 public:
 	ModInformation();
     ZMIErrorCodes::Enum Open(const std::wstring & inName);
@@ -91,6 +78,8 @@ public:
 	
 	ZModInfo GetBasicInfo();
 	void SetBasicInfo(const ZModInfo& Minf);
+
+	UINT64 GetTotalSize() { return ModFilesSize; }
 
 	ByteArr& GetImageData() { return ImgData; }
 	ByteArr& GetZipData() { return ZipData; }
@@ -104,24 +93,18 @@ public:
 
 /*For loading simple Mod Information (.mi) files. */
 namespace SiModInfo {
+
 	struct ModInfo {
 		ZModInfo BasicInfo;
 		ByteArr ImgData;
-
+		UINT64 FolderSz;
 		ModInfo() {
 			
 		}
 
-		ModInfo(const ModInfo& cpy) {
-			BasicInfo = cpy.BasicInfo;
-			if (cpy.ImgData.Size())
-				ImgData.Assign(cpy.ImgData);
-
-		}
-
 		ModInfo(ModInformation& Minf) {
 			BasicInfo = Minf.GetBasicInfo();
-
+			FolderSz = Minf.GetTotalSize();
 			if (Minf.GetImageData().Size())
 				ImgData.Assign(Minf.GetImageData());
 
@@ -134,6 +117,10 @@ namespace SiModInfo {
 
 		const ByteArr& GetImage() const{
 			return ImgData;
+		}
+		UINT64 GetFolderSz() const {
+			return FolderSz;
+
 		}
 	};
 

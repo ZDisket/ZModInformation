@@ -167,6 +167,10 @@ public:
 	//|<- If it fails, returns empty vector
 	std::vector<SItemW> RecursiveStuffInDirectory(const std::wstring& in_sPath, std::wstring wFilter = WALLF);
 
+	//|> Returns the total size of a folder structure, searching recursively
+	//-> Items: The items
+	UINT64 GetSize(std::vector<SItemW>& Items);
+
     // Takes a path from the argument and if possible, returns a full path (ANSI)
 	std::string RelativeToFullPath(const std::string& in_sConvPth);
 

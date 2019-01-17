@@ -14,7 +14,9 @@
                         
                         
 ########################################
-# Description: Defines ZFile class and stuff
+# Description: Defines ZFile class, one meant for easy serialization and writing of binary types,
+# including commonly used std containers without much problem
+#
 # Author: ZDisket
 # Copyright (C) 2019 YOUR MOM GAY LOLOLOL
 #######################################
@@ -29,7 +31,6 @@
 
 // FStream that works with bytes
 typedef std::basic_fstream<BYTE,std::char_traits<BYTE>> ufstream;
-
 
 
 

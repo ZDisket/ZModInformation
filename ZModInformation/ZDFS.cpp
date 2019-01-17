@@ -296,6 +296,26 @@ std::vector<SItemW> ZDFS::RecursiveStuffInDirectory(const std::wstring & in_sPat
 	return l_vStuff;
 }
 
+UINT64 ZDFS::GetSize(std::vector<SItemW>& Items)
+{
+	UINT64 Sz = 0;
+	auto Dit = Items.begin();
+
+	while (Dit != Items.end())
+	{
+		SItemW& Item = *Dit;
+	
+		Sz += Item.FileSzHigh + Item.FileSzLow;
+		if (Item.IType == ZFS_TFOLDER)
+			Sz += GetSize(Item.SubEntries);
+
+		++Dit;
+	}
+
+	return Sz;
+
+}
+
 std::string ZDFS::RelativeToFullPath(const std::string & in_sConvPth)
 {
 
