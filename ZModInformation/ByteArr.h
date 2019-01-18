@@ -22,9 +22,9 @@
 #include <string>
 #include <vector>
 
-typedef std::vector<BYTE> ByteVec;
 typedef unsigned char BYTE;
 typedef long long INT64;
+typedef std::vector<BYTE> ByteVec;
 
 // Incomplete class meant to simplify interactions with dynamic size byte arrays
 // Right now it can only safely store
