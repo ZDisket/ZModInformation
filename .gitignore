@@ -6,6 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.mcl
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -13,6 +14,12 @@
 # Sample mod files
 /ZModInfoTest/A World DIvided/
 /ZModInfoTest/Fishes/
+/ZModInformation/Release2010/
+/ZModInformation/Debug2010/
+/ZModInfoTest/Release2010/
+/ZModInfoTest/Debug2010/
+/2010/
+
 
 # ZMI folder, gets built by the post-build scripts of the 1st project
 ZMI/
