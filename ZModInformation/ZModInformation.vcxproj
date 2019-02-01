@@ -428,6 +428,8 @@ copy /Y $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)ZMI\dll\</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ByteArr.h" />
+    <ClInclude Include="MacroHolder.h" />
+    <ClInclude Include="Macro.h" />
     <ClInclude Include="ModInformation.h" />
     <ClInclude Include="sdafx.hpp" />
     <ClInclude Include="targetver.h" />
@@ -437,7 +439,9 @@ copy /Y $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)ZMI\dll\</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ByteArr.cpp" />
+    <ClCompile Include="MacroHolder.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Macro.cpp" />
     <ClCompile Include="ModInformation.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
