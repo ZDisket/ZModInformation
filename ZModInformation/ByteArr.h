@@ -39,6 +39,7 @@ typedef std::vector<BYTE> ByteVec;
 void smemcpy(void* dest, const size_t& destsz, const void* src, const size_t& count);
 
 // Almost complete class that serves as a "dynamic buffer" of sorts, being able to get and extract data.
+// Define _QT if using Qt
 class ZMI_API ByteArr
 {
 private:

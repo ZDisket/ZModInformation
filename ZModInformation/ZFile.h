@@ -68,6 +68,9 @@ namespace DataSizes {
 class ZMI_API ZFile
 {
 private:
+
+	ZFile(const ZFile&);
+
 	BYTE * m_pData;
 	bool FileOpened;
 	ufstream Stream;

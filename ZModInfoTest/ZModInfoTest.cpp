@@ -7,6 +7,7 @@
 #include <ZMI_DLL.h>
 #include <ZipperInclude.hpp>
 #include <ZFile.h>
+#include <MacroHolder.h>
 
 
 using namespace std;
@@ -64,7 +65,7 @@ uint64_t CalculateDirSize(const String &path, StringVector *errVect = NULL, uint
 
 int main()
 {
-
+	/*
 ModInformation Info1;
 	const wstring foldername = L"A World DIvided";
 	ByteVec Buf;
@@ -106,12 +107,6 @@ ModInformation Info1;
 	Info1.Save(foldername + L".zmi");
 
 
-	
-
-
-
-
-
 
 	ModInformation InfEx;
 	InfEx.Open(L"A World DIvided.zmi");
@@ -143,6 +138,34 @@ ModInformation Info1;
 	Unz.extract();
 
 	wcout << L" Done! " << endl;
+	*/
+
+	MacroHolder Holder;
+	
+	vector<size_t> exy;
+	exy.push_back(20);
+	exy.push_back(5);
+	Macro Mac1(L"The economy is in a ",exy);
+
+	Macro Mac2(L"2020202022020202020DFJAJADADAAD");
+
+	MacroHolder Maccy;
+	Maccy.Data().push_back(Mac1);
+	Maccy.Data().push_back(Mac2);
+
+	Maccy.Save(L"nein.mcl");
+
+	cout << "saving";
+	MacroHolder Laa;
+	
+	Laa.Open(L"nein.mcl");
+	vector<std::wstring> Vstr;
+	Vstr.push_back(L"Very bad state");
+	Vstr.push_back(L"AAAA");
+
+
+	wstring A = Laa.Data()[0].Make(Vstr);
+	wstring B = Laa.Data()[1].Make();
 
 	system("pause");
 
