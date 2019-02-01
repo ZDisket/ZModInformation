@@ -104,6 +104,7 @@ struct SItemW // Unicode verstion of struct that indicates anything found by Stu
 
 
 //! Alternate name: "I don't like boost::filesystem"
+// 2019 NOTE: THIS SHOULD BE STATIC 
 class ZMI_API ZDFS
 {
 private:
