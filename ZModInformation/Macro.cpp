@@ -6,10 +6,12 @@ Macro::Macro()
 {
 
 	Text = L"";
+	Command = L"";
 }
 
 Macro::Macro(const Macro & Cpy)
 {
+	Command = Cpy.Command;
 	Text = Cpy.Text;
 	ArgPos = Cpy.ArgPos;
 }
@@ -21,10 +23,18 @@ Macro::Macro(const std::wstring & InText, const std::vector<size_t>& APos)
 
 }
 
-Macro::Macro(const std::wstring & InTxt)
+Macro::Macro(const std::wstring & InText, const std::wstring & insCmd, const std::vector<size_t>& APos)
+{
+	Text = InText;
+	ArgPos = APos;
+	Command = insCmd;
+
+}
+
+Macro::Macro(const std::wstring & InTxt, const std::wstring& inCmd)
 {
 	Text = InTxt;
-
+	Command = inCmd;
 }
 
 std::wstring Macro::Make(const std::vector<std::wstring>& Args)
@@ -56,6 +66,11 @@ std::wstring Macro::Make()
 		return L""; // Bad boy!!
 }
 
+void Macro::SetCommand(const std::wstring & inCmdS)
+{
+	Command = inCmdS;
+}
+
 
 Macro::~Macro()
 {
@@ -63,6 +78,7 @@ Macro::~Macro()
 
 ZFile & operator<<(ZFile & right, const Macro & op)
 {
+	right << op.GetCommand();
 	right << op.GetBasicText();
 	right << op.GetArgs();
 	return right;
@@ -70,10 +86,15 @@ ZFile & operator<<(ZFile & right, const Macro & op)
 
 ZFile & operator>>(ZFile & right, Macro & op)
 {
+	std::wstring tmcommand;
+	right >> tmcommand;
+	op.SetCommand(tmcommand);
 
 	std::wstring tmp;
 	right >> tmp;
 	op.SetText(tmp);
+
+
 
 	right >> op.GetArgs();
 

@@ -12,11 +12,14 @@ private:
 	// Where are the arguments?
 	std::vector<size_t> ArgPos;
 	std::wstring Text;
+	std::wstring Command;
 public:
 	Macro();
 	Macro(const Macro& Cpy);
 	Macro(const std::wstring& InText, const std::vector<size_t>& APos);
-	Macro(const std::wstring& InTxt);
+	Macro(const std::wstring& InText, const std::wstring& insCmd, const std::vector<size_t>& APos);
+
+	Macro(const std::wstring& InTxt, const std::wstring& inCmd);
 
 	// Return a formed string with the following arguments.
 	// Invalid vector (size disparity) will return empty string.
@@ -27,6 +30,8 @@ public:
 	std::wstring Make();
 
 	std::wstring GetBasicText() const { return Text; }
+	std::wstring GetCommand() const { return Command; }
+	void SetCommand(const std::wstring& inCmdS);
 
 	inline void SetText(const std::wstring& Txt) { Text = Txt; }
 
