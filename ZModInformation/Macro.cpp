@@ -39,24 +39,28 @@ Macro::Macro(const std::wstring & InTxt, const std::wstring& inCmd)
 
 std::wstring Macro::Make(const std::vector<std::wstring>& Args)
 {
+
 	if (Args.size() != ArgPos.size())
 		return L"";
 
 	std::wstring RetTxt = Text;
 
 	size_t p = 0;
+
 	auto It = Args.begin();
 	while (It != Args.end()) {
 
 		RetTxt.insert(ArgPos[p], *It);
+	
+
 
 		++p;
 		++It;
 	}
 
 	return RetTxt;
-
 }
+
 
 std::wstring Macro::Make()
 {
@@ -94,9 +98,11 @@ ZFile & operator>>(ZFile & right, Macro & op)
 	right >> tmp;
 	op.SetText(tmp);
 
+	std::vector<size_t> targs;
 
 
-	right >> op.GetArgs();
+	right >> targs;
 
+	op.SetArgs(targs);
 	return right;
 }

@@ -23,7 +23,6 @@
 #include <Windows.h>
 #include <Shlwapi.h>
 #include <Shlobj.h>
-#include <Shlobj_core.h>
 
 #endif
 

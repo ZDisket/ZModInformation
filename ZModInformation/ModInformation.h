@@ -52,7 +52,7 @@ private:
 	// Version history:
 	// 2
 	// 3: Added mod folder size
-	const short FVersion = 3;
+	const static short FVersion = 3;
 	ZDFS FileSys;
 	// Basic data
 	std::wstring Name;
